@@ -36,6 +36,8 @@ public class Player : MonoBehaviour // класс наследуемый Player от MonoBehaviour
 
     public Scene GameScene;
 
+    [SerializeField] private AudioSource MoneySound;
+
     private void Start() // метод\функия, срабатывающая при старте игры
     {
         PlayerRigidbody = GetComponent<Rigidbody2D>(); // заполняем поле физики\даём ссылку
@@ -116,12 +118,14 @@ public class Player : MonoBehaviour // класс наследуемый Player от MonoBehaviour
     {
         if(collision.tag == "Money") // если игрок коснётся объекта с тегом Money
         {
+            MoneySound.GetComponent<AudioSource>().Play();
             Destroy(MoneyObject); // монета исчезнет
             CountMoney++; // количество монет прибавится на 1
         }
 
         if(collision.tag == "Heart") // если игрок коснётся объекта с тегом Heart
         {
+            MoneySound.GetComponent<AudioSource>().Play();
             Destroy(HeartObject); // сердце исчезнет
             CountHearts++; // количество сердец прибавится на 1
             if(CountHearts == 4)
